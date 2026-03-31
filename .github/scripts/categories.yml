@@ -1,0 +1,71 @@
+categories:
+  - name: Terraform
+    topics:
+      - terraform
+      - terraform-provider
+
+  - name: AWS / Cloud
+    topics:
+      - aws
+      - cloud
+      - lambda
+      - fargate
+      - pulumi
+
+  - name: Go
+    topics:
+      - go
+      - golang
+
+  - name: LINE Bot / Notifications
+    topics:
+      - line-bot
+      - line
+      - linebot
+      - notification
+
+  - name: Editor Extensions
+    topics:
+      - vscode
+      - vscode-extension
+      - obsidian
+      - obsidian-plugin
+      - editor
+
+  - name: AI / Agent Skills
+    topics:
+      - ai
+      - agent
+      - agent-skill
+      - copilot-skill
+      - llm
+
+  - name: Python
+    topics:
+      - python
+
+  - name: DevOps / Containers
+    topics:
+      - docker
+      - devops
+      - container
+      - wasm
+
+  - name: GitHub Actions
+    topics:
+      - github-actions
+      - actions
+
+  - name: Web
+    topics:
+      - web
+      - javascript
+      - jquery
+      - html
+
+  - name: Personal
+    topics:
+      - personal
+      - dotfiles
+
+default_category: Other
