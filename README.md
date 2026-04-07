@@ -3,7 +3,6 @@
 - Terraform
   - [strapi-fargate-with-aurora-serverless](https://github.com/tsubasaogawa/strapi-fargate-with-aurora-serverless) - Deploy Strapi CMS on AWS Fargate Spot with Aurora Serverless using Terraform
   - [terraform-appsync-graphql-test](https://github.com/tsubasaogawa/terraform-appsync-graphql-test) - Demonstrates provisioning AWS AppSync GraphQL API using Terraform configuration files
-  - [terraform-provider-docs-opener-vscode-extension](https://github.com/tsubasaogawa/terraform-provider-docs-opener-vscode-extension) - Opens Terraform documentation pages in the browser from VSCode highlights
   - [terraform-variable-description-coverage](https://github.com/tsubasaogawa/terraform-variable-description-coverage) - Measure and report coverage of descriptions for Terraform variables using Go
   - [tfmodblock](https://github.com/tsubasaogawa/tfmodblock) - Generates Terraform module blocks from variable blocks using Go
   - [tfvergen](https://github.com/tsubasaogawa/tfvergen) - Generate .terraform-version files for Terraform environment management using Go
@@ -35,6 +34,7 @@
   - [hatebu-web-clipper-for-obsidian](https://github.com/tsubasaogawa/hatebu-web-clipper-for-obsidian) - Fetch Hatena Bookmarks by tag and save them as markdown files for Obsidian use
   - [obsidian-plugin-flexible-title-text](https://github.com/tsubasaogawa/obsidian-plugin-flexible-title-text) - Customize Obsidian window title bar text with a flexible plugin written in TypeScript
   - [sl-vscode](https://github.com/tsubasaogawa/sl-vscode) - Integrates a humorous train animation inspired by sl command into VSCode editor
+  - [terraform-provider-docs-opener-vscode-extension](https://github.com/tsubasaogawa/terraform-provider-docs-opener-vscode-extension) - Opens Terraform documentation pages in the browser from VSCode highlights
   - [tfmodblock-vscode-extension](https://github.com/tsubasaogawa/tfmodblock-vscode-extension) - Provides Terraform module block snippets for Visual Studio Code in JavaScript
   - [vscode-healthcheck](https://github.com/tsubasaogawa/vscode-healthcheck) - Provide a VSCode extension running a simple webserver for health checks
 
