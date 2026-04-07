@@ -55,7 +55,4 @@ categories:
       - personal
       - dotfiles
 
-  - name: Other
-    topics:
-
 default_category: Other
