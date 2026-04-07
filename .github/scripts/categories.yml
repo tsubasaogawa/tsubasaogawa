@@ -12,17 +12,19 @@ categories:
       - fargate
       - pulumi
 
-  - name: Go
+  - name: AI / Agent Skills
     topics:
-      - go
-      - golang
+      - ai
+      - agent
+      - agent-skill
+      - agent-skills
+      - copilot-skill
+      - llm
 
-  - name: LINE Bot / Notifications
+  - name: CLI Tools
     topics:
-      - line-bot
-      - line
-      - linebot
-      - notification
+      - cli
+      - tool
 
   - name: Editor Extensions
     topics:
@@ -31,18 +33,6 @@ categories:
       - obsidian
       - obsidian-plugin
       - editor
-
-  - name: AI / Agent Skills
-    topics:
-      - ai
-      - agent
-      - agent-skill
-      - copilot-skill
-      - llm
-
-  - name: Python
-    topics:
-      - python
 
   - name: DevOps / Containers
     topics:
@@ -56,12 +46,9 @@ categories:
       - github-actions
       - actions
 
-  - name: Web
+  - name: Web Applications
     topics:
-      - web
-      - javascript
-      - jquery
-      - html
+      - webapp
 
   - name: Personal
     topics:
