@@ -287,6 +287,99 @@ class UpdateReadmeTests(unittest.TestCase):
             ),
         )
 
+    def test_build_readme_wraps_categories_after_third_in_single_details_block(self):
+        repos = [
+            {
+                "name": "zeta-alpha",
+                "html_url": "https://example.com/zeta-alpha",
+                "description": "Original zeta alpha description",
+                "topics": ["alpha"],
+            },
+            {
+                "name": "Alpha-alpha",
+                "html_url": "https://example.com/alpha-alpha",
+                "description": "Original alpha alpha description",
+                "topics": ["alpha"],
+            },
+            {
+                "name": "beta-repo",
+                "html_url": "https://example.com/beta",
+                "description": "Original beta description",
+                "topics": ["beta"],
+            },
+            {
+                "name": "gamma-repo",
+                "html_url": "https://example.com/gamma",
+                "description": "Original gamma description",
+                "topics": ["gamma"],
+            },
+            {
+                "name": "delta-repo",
+                "html_url": "https://example.com/delta",
+                "description": "Original delta description",
+                "topics": ["delta"],
+            },
+            {
+                "name": "epsilon-repo",
+                "html_url": "https://example.com/epsilon",
+                "description": "Original epsilon description",
+                "topics": ["epsilon"],
+            },
+            {
+                "name": "misc-repo",
+                "html_url": "https://example.com/misc",
+                "description": "Original misc description",
+                "topics": [],
+            },
+        ]
+        categories = [
+            {"name": "Alpha", "topics": ["alpha"]},
+            {"name": "Beta", "topics": ["beta"]},
+            {"name": "Gamma", "topics": ["gamma"]},
+            {"name": "Delta", "topics": ["delta"]},
+            {"name": "Epsilon", "topics": ["epsilon"]},
+        ]
+        descriptions = {
+            "Alpha-alpha": "Generated alpha description",
+            "misc-repo": "Generated misc description",
+        }
+
+        readme = update_readme.build_readme(repos, categories, "Other", descriptions)
+
+        self.assertEqual(
+            readme,
+            "\n".join(
+                [
+                    "## Repositories",
+                    "",
+                    "- Alpha",
+                    "  - [Alpha-alpha](https://example.com/alpha-alpha) - Generated alpha description",
+                    "  - [zeta-alpha](https://example.com/zeta-alpha) - Original zeta alpha description",
+                    "",
+                    "- Beta",
+                    "  - [beta-repo](https://example.com/beta) - Original beta description",
+                    "",
+                    "- Gamma",
+                    "  - [gamma-repo](https://example.com/gamma) - Original gamma description",
+                    "",
+                    "<details>",
+                    "<summary>More</summary>",
+                    "",
+                    "- Delta",
+                    "  - [delta-repo](https://example.com/delta) - Original delta description",
+                    "",
+                    "- Epsilon",
+                    "  - [epsilon-repo](https://example.com/epsilon) - Original epsilon description",
+                    "",
+                    "- Other",
+                    "  - [misc-repo](https://example.com/misc) - Generated misc description",
+                    "",
+                    "</details>",
+                    "",
+                ]
+            ),
+        )
+
     def test_main_orchestrates_dependencies_and_writes_readme(self):
         repos = [{"name": "repo-a"}]
         categories = [{"name": "Python", "topics": ["python"]}]
