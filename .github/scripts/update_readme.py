@@ -160,19 +160,36 @@ def build_readme(
     for cat in categorized:
         categorized[cat].sort(key=lambda r: r["name"].lower())
 
-    lines = ["## Repositories", ""]
-
-    category_order = [c["name"] for c in categories] + [default_category]
-    seen = set()
-    for cat_name in category_order:
-        if cat_name in seen or cat_name not in categorized:
-            continue
-        seen.add(cat_name)
+    def append_category(lines: list[str], cat_name: str) -> None:
         lines.append(f"- {cat_name}")
         for repo in categorized[cat_name]:
             desc = descriptions.get(repo["name"], repo.get("description") or "")
             url = repo["html_url"]
             lines.append(f"  - [{repo['name']}]({url}) - {desc}")
+        lines.append("")
+
+    lines = ["## Repositories", ""]
+
+    category_order = [c["name"] for c in categories] + [default_category]
+    seen = set()
+    visible_categories: list[str] = []
+    for cat_name in category_order:
+        if cat_name in seen or cat_name not in categorized:
+            continue
+        seen.add(cat_name)
+        visible_categories.append(cat_name)
+
+    for cat_name in visible_categories[:3]:
+        append_category(lines, cat_name)
+
+    collapsed_categories = visible_categories[3:]
+    if collapsed_categories:
+        lines.append("<details>")
+        lines.append("<summary>More</summary>")
+        lines.append("")
+        for cat_name in collapsed_categories:
+            append_category(lines, cat_name)
+        lines.append("</details>")
         lines.append("")
 
     return "\n".join(lines)
