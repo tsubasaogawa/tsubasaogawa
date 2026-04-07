@@ -22,6 +22,9 @@
   - [session-stocker-skill](https://github.com/tsubasaogawa/session-stocker-skill) - Summarize conversation knowledge and save it as a Markdown note using agent skills
   - [skillx](https://github.com/tsubasaogawa/skillx) - Enable AI agents to test skills from any GitHub repo without formal installation
 
+<details>
+<summary>More</summary>
+
 - CLI Tools
   - [flickr-s3-sync-in-blog](https://github.com/tsubasaogawa/flickr-s3-sync-in-blog) - Synchronize and migrate photos from Flickr to AWS S3 using Go
   - [hatenablog-exported-text-extractor](https://github.com/tsubasaogawa/hatenablog-exported-text-extractor) - Extract text content from exported Hatenablog files using Python scripts
@@ -78,3 +81,5 @@
   - [weatherkun](https://github.com/tsubasaogawa/weatherkun) - Determines if an umbrella is needed today based on weather data using Perl
   - [yamato-mail-notifier-to-linebot](https://github.com/tsubasaogawa/yamato-mail-notifier-to-linebot) - Sends Kuroneko Yamato email notifications to Linebot using Python
   - [ytvsearch](https://github.com/tsubasaogawa/ytvsearch) - Provide a Python API for TV program data by scraping Yahoo Japan's program guide
+
+</details>
