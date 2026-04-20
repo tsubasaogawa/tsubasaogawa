@@ -57,5 +57,6 @@
   "vscode-healthcheck": "Provide a VSCode extension running a simple webserver for health checks",
   "weatherkun": "Determines if an umbrella is needed today based on weather data using Perl",
   "yamato-mail-notifier-to-linebot": "Sends Kuroneko Yamato email notifications to Linebot using Python",
-  "ytvsearch": "Provide a Python API for TV program data by scraping Yahoo Japan's program guide"
+  "ytvsearch": "Provide a Python API for TV program data by scraping Yahoo Japan's program guide",
+  "hacker-news-digest": "Fetches and summarizes popular Hacker News articles from the previous day in Japanese"
 }
