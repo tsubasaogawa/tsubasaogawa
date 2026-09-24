@@ -158,12 +158,13 @@ class UpdateReadmeTests(unittest.TestCase):
                 "topics": ["python", "cli"],
                 "language": "Python",
             },
+            "poolside/laguna-xs-2.1:free",
         )
 
         self.assertEqual(description, "Useful CLI tool")
         client.chat.completions.create.assert_called_once()
         kwargs = client.chat.completions.create.call_args.kwargs
-        self.assertEqual(kwargs["model"], update_readme.GITHUB_MODELS_MODEL)
+        self.assertEqual(kwargs["model"], "poolside/laguna-xs-2.1:free")
         self.assertEqual(kwargs["max_tokens"], 60)
         self.assertEqual(kwargs["temperature"], 0.3)
         self.assertIn("Repository: sample-repo", kwargs["messages"][1]["content"])
@@ -175,7 +176,14 @@ class UpdateReadmeTests(unittest.TestCase):
         cache = {"repo-a": "cached description"}
 
         with (
-            patch.dict(os.environ, {"GITHUB_TOKEN": "token-123"}, clear=True),
+            patch.dict(
+                os.environ,
+                {
+                    "OPENROUTER_API_KEY": "openrouter-test-key",
+                    "OPENROUTER_MODEL": "test/model",
+                },
+                clear=True,
+            ),
             patch.object(update_readme, "OpenAI") as openai_class,
         ):
             result = update_readme.generate_descriptions([{"name": "repo-a"}], cache)
@@ -184,29 +192,40 @@ class UpdateReadmeTests(unittest.TestCase):
         self.assertIs(result, cache)
         self.assertEqual(result, {"repo-a": "cached description"})
 
-    def test_generate_descriptions_without_token_falls_back_and_warns(self):
-        repos = [
-            {"name": "repo-a", "description": "Existing description"},
-            {"name": "repo-b", "description": ""},
-        ]
-        stderr = io.StringIO()
+    def test_generate_descriptions_requires_api_key_when_all_repos_are_cached(self):
+        repos = [{"name": "repo-a"}]
+        cache = {"repo-a": "cached description"}
 
         with (
-            patch.dict(os.environ, {}, clear=True),
-            redirect_stderr(stderr),
+            patch.dict(
+                os.environ,
+                {"OPENROUTER_MODEL": "test/model"},
+                clear=True,
+            ),
+            patch.object(update_readme, "OpenAI") as openai_class,
         ):
-            descriptions = update_readme.generate_descriptions(repos, {})
+            with self.assertRaisesRegex(ValueError, "OPENROUTER_API_KEY"):
+                update_readme.generate_descriptions(repos, cache)
 
-        self.assertEqual(
-            descriptions,
-            {
-                "repo-a": "Existing description",
-                "repo-b": "repo-b",
-            },
-        )
-        self.assertIn("WARNING: GITHUB_TOKEN not set", stderr.getvalue())
+        openai_class.assert_not_called()
 
-    def test_generate_descriptions_uses_openai_and_falls_back_on_error(self):
+    def test_generate_descriptions_requires_model_when_cache_is_complete(self):
+        repos = [{"name": "repo-a"}]
+        cache = {"repo-a": "cached description"}
+
+        with patch.object(update_readme, "OpenAI") as openai_class:
+            for model in (None, "", "   "):
+                env = {"OPENROUTER_API_KEY": "openrouter-test-key"}
+                if model is not None:
+                    env["OPENROUTER_MODEL"] = model
+
+                with self.subTest(model=model), patch.dict(os.environ, env, clear=True):
+                    with self.assertRaisesRegex(ValueError, "OPENROUTER_MODEL"):
+                        update_readme.generate_descriptions(repos, cache)
+
+        openai_class.assert_not_called()
+
+    def test_generate_descriptions_uses_openrouter_and_falls_back_on_error(self):
         repos = [
             {"name": "repo-a", "description": "Existing description"},
             {"name": "repo-b", "description": ""},
@@ -215,7 +234,14 @@ class UpdateReadmeTests(unittest.TestCase):
         stderr = io.StringIO()
 
         with (
-            patch.dict(os.environ, {"GITHUB_TOKEN": "token-123"}, clear=True),
+            patch.dict(
+                os.environ,
+                {
+                    "OPENROUTER_API_KEY": "openrouter-test-key",
+                    "OPENROUTER_MODEL": "custom/model",
+                },
+                clear=True,
+            ),
             patch.object(update_readme, "OpenAI", return_value=client) as openai_class,
             patch.object(
                 update_readme,
@@ -228,10 +254,17 @@ class UpdateReadmeTests(unittest.TestCase):
             descriptions = update_readme.generate_descriptions(repos, {})
 
         openai_class.assert_called_once_with(
-            base_url=update_readme.GITHUB_MODELS_ENDPOINT,
-            api_key="token-123",
+            base_url="https://openrouter.ai/api/v1",
+            api_key="openrouter-test-key",
         )
         self.assertEqual(generate_description.call_count, 2)
+        self.assertEqual(
+            [
+                call_args.args[2]
+                for call_args in generate_description.call_args_list
+            ],
+            ["custom/model", "custom/model"],
+        )
         self.assertEqual(
             descriptions,
             {

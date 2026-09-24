@@ -15,8 +15,7 @@ CATEGORIES_FILE = SCRIPT_DIR / "categories.yml"
 CACHE_FILE = SCRIPT_DIR / "descriptions_cache.json"
 README_FILE = SCRIPT_DIR.parent.parent / "README.md"
 
-GITHUB_MODELS_ENDPOINT = "https://models.github.ai/inference"
-GITHUB_MODELS_MODEL = "openai/gpt-4.1-mini"
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 
 def fetch_repositories(token: str) -> list[dict]:
@@ -74,8 +73,8 @@ def save_cache(cache: dict[str, str]) -> None:
         f.write("\n")
 
 
-def generate_description(client: OpenAI, repo: dict) -> str:
-    """Generate a one-line English description using GitHub Models."""
+def generate_description(client: OpenAI, repo: dict, model: str) -> str:
+    """Generate a one-line English description using OpenRouter."""
     context_parts = [f"Repository: {repo['name']}"]
     if repo.get("description"):
         context_parts.append(f"Existing description: {repo['description']}")
@@ -87,7 +86,7 @@ def generate_description(client: OpenAI, repo: dict) -> str:
     context = "\n".join(context_parts)
 
     response = client.chat.completions.create(
-        model=GITHUB_MODELS_MODEL,
+        model=model,
         messages=[
             {
                 "role": "system",
@@ -113,26 +112,28 @@ def generate_descriptions(
     repos: list[dict],
     cache: dict[str, str],
 ) -> dict[str, str]:
-    """Generate descriptions for repositories not in cache."""
+    """Generate descriptions for repositories not in cache using OpenRouter."""
+    model = os.environ.get("OPENROUTER_MODEL", "").strip()
+    if not model:
+        raise ValueError(
+            "OPENROUTER_MODEL is required to generate README descriptions."
+        )
+
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        raise ValueError(
+            "OPENROUTER_API_KEY is required to generate README descriptions."
+        )
+
     new_repos = [r for r in repos if r["name"] not in cache]
     if not new_repos:
         return cache
 
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        print(
-            "WARNING: GITHUB_TOKEN not set. Skipping AI description generation.",
-            file=sys.stderr,
-        )
-        for r in new_repos:
-            cache[r["name"]] = r.get("description") or r["name"]
-        return cache
-
-    client = OpenAI(base_url=GITHUB_MODELS_ENDPOINT, api_key=token)
+    client = OpenAI(base_url=OPENROUTER_BASE_URL, api_key=api_key)
 
     for repo in new_repos:
         try:
-            desc = generate_description(client, repo)
+            desc = generate_description(client, repo, model)
             cache[repo["name"]] = desc
             print(f"  Generated: {repo['name']} -> {desc}")
         except Exception as e:
