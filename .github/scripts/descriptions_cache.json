@@ -58,5 +58,8 @@
   "weatherkun": "Determines if an umbrella is needed today based on weather data using Perl",
   "yamato-mail-notifier-to-linebot": "Sends Kuroneko Yamato email notifications to Linebot using Python",
   "ytvsearch": "Provide a Python API for TV program data by scraping Yahoo Japan's program guide",
-  "hacker-news-digest": "Fetches and summarizes popular Hacker News articles from the previous day in Japanese"
+  "hacker-news-digest": "Fetches and summarizes popular Hacker News articles from the previous day in Japanese",
+  "collage-it": "combines 9 photos into a single square 3x3 collage image",
+  "skills": "Python skills assessment and evaluation framework",
+  "terraform-plugin-cache-pruner": "terraform-plugin-cache-pruner"
 }

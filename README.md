@@ -3,6 +3,7 @@
 - Terraform
   - [strapi-fargate-with-aurora-serverless](https://github.com/tsubasaogawa/strapi-fargate-with-aurora-serverless) - Deploy Strapi CMS on AWS Fargate Spot with Aurora Serverless using Terraform
   - [terraform-appsync-graphql-test](https://github.com/tsubasaogawa/terraform-appsync-graphql-test) - Demonstrates provisioning AWS AppSync GraphQL API using Terraform configuration files
+  - [terraform-plugin-cache-pruner](https://github.com/tsubasaogawa/terraform-plugin-cache-pruner) - terraform-plugin-cache-pruner
   - [terraform-variable-description-coverage](https://github.com/tsubasaogawa/terraform-variable-description-coverage) - Measure and report coverage of descriptions for Terraform variables using Go
   - [tfmodblock](https://github.com/tsubasaogawa/tfmodblock) - Generates Terraform module blocks from variable blocks using Go
   - [tfvergen](https://github.com/tsubasaogawa/tfvergen) - Generate .terraform-version files for Terraform environment management using Go
@@ -16,11 +17,7 @@
 
 - AI / Agent Skills
   - [ai-writing-rules](https://github.com/tsubasaogawa/ai-writing-rules) - Provide guidelines and rules for writing natural, personalized AI-generated text
-  - [hacker-news-digest](https://github.com/tsubasaogawa/hacker-news-digest) - Fetches and summarizes popular Hacker News articles from the previous day in Japanese
   - [manage-agent-skills](https://github.com/tsubasaogawa/manage-agent-skills) - Provide a CLI tool to install and manage agent skills from GitHub repositories using Go
-  - [prompt-feedback-skill](https://github.com/tsubasaogawa/prompt-feedback-skill) - Deliver structured feedback on user instructions for AI agent interactions
-  - [semantic-commit-helper](https://github.com/tsubasaogawa/semantic-commit-helper) - Generate Conventional Commit messages by analyzing staged diffs and user intent for git commits
-  - [session-stocker-skill](https://github.com/tsubasaogawa/session-stocker-skill) - Summarize conversation knowledge and save it as a Markdown note using agent skills
   - [skillx](https://github.com/tsubasaogawa/skillx) - Enable AI agents to test skills from any GitHub repo without formal installation
 
 <details>
@@ -70,6 +67,7 @@
   - [tsubasaogawa.me](https://github.com/tsubasaogawa/tsubasaogawa.me) - Hosts a personal homepage styled with SCSS for tsubasaogawa.me
 
 - Other
+  - [collage-it](https://github.com/tsubasaogawa/collage-it) - combines 9 photos into a single square 3x3 collage image
   - [does-it-rains-today-for-linebot](https://github.com/tsubasaogawa/does-it-rains-today-for-linebot) - Posts daily rain status updates to a Line bot using Python
   - [famimad](https://github.com/tsubasaogawa/famimad) - Detects faces with USB camera and plays Family Mart sound using Ruby
   - [google-calendar-notifier-to-linebot](https://github.com/tsubasaogawa/google-calendar-notifier-to-linebot) - Sends notifications to LINE Bot for new Google Calendar events using Go
@@ -77,6 +75,7 @@
   - [linebot-publisher-layer](https://github.com/tsubasaogawa/linebot-publisher-layer) - Provide a lightweight Python module for posting messages to LINE Bot via AWS Lambda Layer
   - [mqtt-networking-test](https://github.com/tsubasaogawa/mqtt-networking-test) - Implement PHP publisher and subscriber test programs using phpMQTT for MQTT networking
   - [okaeri](https://github.com/tsubasaogawa/okaeri) - Implements spoken recognition with DNN to reply 'okaeri' when hearing 'tadaima' in Python
+  - [skills](https://github.com/tsubasaogawa/skills) - Python skills assessment and evaluation framework
   - [tv-program-notifier-to-linebot](https://github.com/tsubasaogawa/tv-program-notifier-to-linebot) - Sends TV program notifications to LINE messaging app using a Python bot
   - [virtual-ogawa](https://github.com/tsubasaogawa/virtual-ogawa) - Generates sentences using an RNN trained on diary data from 2004 to 2017 in Python
   - [weatherkun](https://github.com/tsubasaogawa/weatherkun) - Determines if an umbrella is needed today based on weather data using Perl
